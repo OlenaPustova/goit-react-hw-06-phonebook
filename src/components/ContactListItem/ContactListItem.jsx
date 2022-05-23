@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 import { useDispatch } from 'react-redux';
-import { deleteContact } from 'redux/phonebook-actions';
+import { deleteContact } from 'redux/phonebook/phonebook-actions';
 import s from './ContactListItem.module.scss';
 
 function ContactListItem({ name, number, id }) {

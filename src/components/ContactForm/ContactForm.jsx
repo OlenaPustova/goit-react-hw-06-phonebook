@@ -1,6 +1,6 @@
 import s from './ContactForm.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/phonebook-actions';
+import { addContact } from 'redux/phonebook/phonebook-actions';
 import { useForm } from 'hooks/useForm';
 import { memo } from 'react';
 

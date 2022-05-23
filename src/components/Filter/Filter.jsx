@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { findContact } from 'redux/phonebook-actions';
+import { findContact } from 'redux/phonebook/phonebook-actions';
 import s from './Filter.module.scss';
 
 export default function Filter() {

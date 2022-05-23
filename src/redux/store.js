@@ -1,6 +1,6 @@
 // import { combineReducers } from 'redux';
 import { configureStore } from '@reduxjs/toolkit';
-import phonebookReducer from './phonebook-reducer';
+import phonebookReducer from './phonebook/phonebook-reducer';
 import storage from 'redux-persist/lib/storage';
 import {
   persistStore,

@@ -15,6 +15,10 @@ export function useForm({ initialValues, cbOnSubmit }) {
   const handleSubmit = e => {
     e.preventDefault();
     cbOnSubmit(form);
+    reset();
+  };
+
+  const reset = () => {
     setForm({ name: '', number: '' });
   };
 
