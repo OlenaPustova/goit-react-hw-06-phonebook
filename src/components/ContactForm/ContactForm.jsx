@@ -1,54 +1,32 @@
-import { useState } from 'react';
 import s from './ContactForm.module.scss';
-import { nanoid } from 'nanoid';
-import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { addContact } from 'redux/phonebook-actions';
+import { useForm } from 'hooks/useForm';
+import { memo } from 'react';
 
-export default function ContactForm({ addContact }) {
-  // const [name, setName] = useState('');
-  // const [number, setNumber] = useState('');
+function ContactForm() {
+  const dispatch = useDispatch();
+  const contacts = useSelector(state => state.contacts.items);
 
-  const [form, setForm] = useState({
-    name: '',
-    number: '',
+  const { form, handleChange, handleSubmit } = useForm({
+    initialValues: {
+      name: '',
+      number: '',
+    },
+    cbOnSubmit: formValues => {
+      if (
+        contacts.some(item =>
+          item.name.toLowerCase().includes(formValues.name.toLowerCase())
+        )
+      ) {
+        return alert(
+          `${formValues.name} with number ${formValues.number} is already in contacts`
+        );
+      }
+      dispatch(addContact(formValues));
+    },
   });
-
   const { name, number } = form;
-
-  const handleChange = e => {
-    const { name, value } = e.target;
-
-    setForm(prevForm => {
-      return {
-        ...prevForm,
-        [name]: value,
-      };
-    });
-
-    // switch (name) {
-    //   case 'name':
-    //     setName(value);
-    //     break;
-
-    //   case 'number':
-    //     setNumber(value);
-    //     break;
-
-    //   default:
-    //     break;
-    // }
-  };
-
-  const reset = () => {
-    setForm({ name: '', number: '' });
-    // setName('');
-    // setNumber('');
-  };
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    addContact({ ...form, id: nanoid() });
-    reset();
-  };
 
   return (
     <form className={s.form} onSubmit={handleSubmit}>
@@ -81,6 +59,4 @@ export default function ContactForm({ addContact }) {
   );
 }
 
-ContactForm.propTypes = {
-  addContact: PropTypes.func.isRequired,
-};
+export default memo(ContactForm);
